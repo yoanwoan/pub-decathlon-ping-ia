@@ -86,10 +86,14 @@
 
     .product { display: grid; grid-template-columns: minmax(0, 1.13fr) minmax(340px, .87fr); align-items: center; gap: clamp(36px, 6vw, 78px); padding-top: 26px; padding-bottom: 76px; }
     .gallery { min-width: 0; }
-    .product-visual { position: relative; min-height: 540px; display: grid; place-items: center; overflow: hidden; background: var(--soft); }
+    .product-visual { position: relative; min-height: 500px; display: grid; place-items: center; overflow: hidden; background: var(--soft); }
     .visual-label { position: absolute; top: 24px; left: 26px; color: var(--muted); font-size: 12px; font-weight: 700; }
     .product-illustration { position: relative; z-index: 1; width: min(94%, 480px); height: auto; margin-top: 16px; }
     .visual-caption { position: absolute; right: 16px; bottom: 19px; left: 16px; color: var(--muted); font-size: 12px; text-align: center; }
+    .gallery-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 10px 0 0; padding: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); list-style: none; }
+    .gallery-facts li { min-height: 54px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 8px; color: var(--muted); font-size: 11px; font-weight: 500; text-align: center; }
+    .gallery-facts li + li { border-left: 1px solid var(--line); }
+    .gallery-facts strong { color: var(--ink); font-size: 12px; }
 
     .product-info { padding-top: 5px; }
     .category { margin: 0 0 12px; color: var(--muted); font-size: 14px; font-weight: 500; }
@@ -99,7 +103,12 @@
     .button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 20px; border: 0; border-radius: 3px; background: var(--blue); color: var(--button-text); font-size: 14px; font-weight: 700; text-align: center; text-decoration: none; transition: background-color .18s ease; }
     .button:hover { background: var(--blue-dark); }
     .button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
-    .project-note { margin: 13px 0 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .product-summary { margin: 26px 0 0; border-top: 1px solid var(--line); }
+    .product-summary div { display: grid; grid-template-columns: minmax(120px, .7fr) 1fr; gap: 15px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 13px; line-height: 1.5; }
+    .product-summary dt { color: var(--muted); }
+    .product-summary dd { margin: 0; font-weight: 500; }
+    .project-note { margin: 18px 0 0; padding: 13px 15px; border-left: 3px solid var(--blue); background: var(--soft); color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .project-note strong { color: var(--ink); }
 
     .features-section { padding: 48px 0 56px; background: var(--soft); }
     .features-heading { margin: 0 0 22px; }
@@ -153,6 +162,7 @@
       .product-visual { min-height: auto; aspect-ratio: 1 / .88; }
       .product-illustration { width: min(92%, 430px); }
       .product-info { max-width: 620px; }
+      .product-summary { margin-top: 22px; }
       .features-section { padding: 38px 0 42px; }
       .feature-grid { grid-template-columns: 1fr; gap: 10px; }
       .feature-card { min-height: 0; display: grid; grid-template-columns: 32px 1fr; column-gap: 14px; padding: 16px; }
@@ -171,6 +181,9 @@
       .product-visual { aspect-ratio: 1 / .88; }
       .visual-label { top: 18px; left: 18px; font-size: 11px; }
       .visual-caption { bottom: 14px; font-size: 11px; }
+      .gallery-facts li { min-height: 50px; display: block; padding: 8px 4px; font-size: 10px; }
+      .gallery-facts strong { display: block; margin-bottom: 3px; font-size: 11px; }
+      .product-summary div { grid-template-columns: 105px 1fr; gap: 10px; font-size: 12px; }
       .details-section { padding: 48px 0; }
       .product-detail summary { min-height: 60px; font-size: 14px; }
       .detail-content { padding-right: 4px; font-size: 13px; }
@@ -232,6 +245,11 @@
           </svg>
           <span class="visual-caption">Illustration du module et de ses capteurs</span>
         </div>
+        <ul class="gallery-facts" aria-label="Résumé du concept">
+          <li><span><strong>Format</strong><br>module compact</span></li>
+          <li><span><strong>Fixation</strong><br>amovible</span></li>
+          <li><span><strong>Usage</strong><br>tennis de table</span></li>
+        </ul>
       </div>
 
       <div class="product-info">
@@ -241,7 +259,12 @@
         <div class="actions">
           <a class="button" href="#video">Voir la vidéo <span aria-hidden="true">↓</span></a>
         </div>
-        <p class="project-note">Concept présenté à titre illustratif; il ne s’agit pas d’un produit commercialisé.</p>
+        <dl class="product-summary">
+          <div><dt>Dans le concept</dt><dd>Comptage des points</dd></div>
+          <div><dt>Suivi du jeu</dt><dd>Vitesse et trajectoire de la balle</dd></div>
+          <div><dt>Application</dt><dd>Statistiques et conseils de jeu</dd></div>
+        </dl>
+        <p class="project-note"><strong>Projet conceptuel</strong><br>Présentation inspirée de la vidéo; ce module n’est pas un produit commercialisé.</p>
       </div>
     </section>
 

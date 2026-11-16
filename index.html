@@ -3,9 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fff">
-  <meta name="description" content="Découvre PING AI, le concept connecté qui réinvente l'expérience du tennis de table.">
-  <title>PING AI — Concept connecté de tennis de table</title>
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Découvre PING AI, un accessoire de table de ping-pong imaginé pour enrichir tes parties.">
+  <title>PING AI — Accessoire de table de ping-pong</title>
+  <script>
+    try {
+      const savedTheme = localStorage.getItem("ping-ai-theme");
+      document.documentElement.dataset.theme =
+        savedTheme === "light" || savedTheme === "dark"
+          ? savedTheme
+          : matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+    } catch {
+      document.documentElement.dataset.theme =
+        matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+  </script>
   <style>
     :root {
       color-scheme: light;
@@ -14,9 +28,31 @@
       --ink: #17191d;
       --muted: #616873;
       --soft: #f3f5f7;
-      --line: #e5e8ec;
+      --page: #fff;
+      --surface: #fff;
       --white: #fff;
+      --line: #e5e8ec;
+      --video-surface: #f3f5fb;
       --accent: #d7f45b;
+      --button-text: #fff;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --blue: #91b7ff;
+      --blue-dark: #b4cdff;
+      --ink: #f3f5f8;
+      --muted: #b1bac8;
+      --soft: #202734;
+      --page: #11151d;
+      --surface: #191f29;
+      --white: #fff;
+      --line: #323b49;
+      --video-surface: #1c2431;
+      --button-text: #101725;
+    }
+
+    :root {
       font-family: Arial, Helvetica, sans-serif;
       font-synthesis: none;
       text-rendering: optimizeLegibility;
@@ -24,7 +60,7 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { margin: 0; color: var(--ink); background: var(--white); }
+    body { margin: 0; color: var(--ink); background: var(--page); transition: color .2s ease, background-color .2s ease; }
     a { color: inherit; }
     .wrap { width: min(1200px, calc(100% - 48px)); margin-inline: auto; }
 
@@ -32,49 +68,59 @@
     .announcement-inner { min-height: 34px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-align: center; }
     .announcement-mark { color: var(--accent); }
 
-    .site-header { border-bottom: 1px solid var(--line); background: var(--white); }
+    .site-header { border-bottom: 1px solid var(--line); background: var(--surface); }
     .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
     .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font-size: 16px; font-weight: 900; letter-spacing: -.05em; }
     .brand-symbol { color: var(--blue); font-size: 22px; }
     .nav-link { color: var(--ink); font-size: 13px; font-weight: 700; text-decoration: none; }
     .nav-link:hover { color: var(--blue); }
+    .nav-actions { display: flex; align-items: center; gap: 22px; }
+    .theme-toggle { min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 11px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--ink); font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; transition: background-color .18s ease, border-color .18s ease; }
+    .theme-toggle:hover { border-color: var(--blue); }
+    .theme-toggle:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+    .theme-toggle svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; }
+    .theme-icon-moon { display: none; }
+    :root[data-theme="dark"] .theme-icon-sun { display: none; }
+    :root[data-theme="dark"] .theme-icon-moon { display: block; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
     main { overflow: hidden; }
-    .breadcrumbs { padding-top: 20px; color: var(--muted); font-size: 12px; }
+    .breadcrumbs { padding-top: 20px; color: var(--muted); font-size: 12px; line-height: 1.7; }
     .breadcrumbs span { margin: 0 7px; color: #a4a9b0; }
 
-    .product { display: grid; grid-template-columns: minmax(0, 1.13fr) minmax(340px, .87fr); align-items: start; gap: clamp(36px, 6vw, 78px); padding-top: 26px; padding-bottom: 76px; }
+    .product { display: grid; grid-template-columns: minmax(0, 1.13fr) minmax(340px, .87fr); align-items: center; gap: clamp(36px, 6vw, 78px); padding-top: 26px; padding-bottom: 76px; }
     .gallery { min-width: 0; }
-    .product-visual { position: relative; min-height: 590px; display: grid; place-items: center; overflow: hidden; border-radius: 12px; background: #eff2f5; }
-    .product-visual::before, .product-visual::after { content: ""; position: absolute; border: 1px solid #ffffffbd; border-radius: 50%; pointer-events: none; }
-    .product-visual::before { width: 430px; height: 430px; }
-    .product-visual::after { width: 340px; height: 340px; }
-    .visual-label { position: absolute; top: 20px; left: 20px; z-index: 1; padding: 8px 11px; border-radius: 4px; background: var(--white); font-size: 10px; font-weight: 800; letter-spacing: .09em; }
-    .product-illustration { position: relative; z-index: 1; width: min(88%, 500px); height: auto; filter: drop-shadow(0 26px 20px #2c333322); }
-    .visual-caption { position: absolute; right: 16px; bottom: 14px; left: 16px; color: #545d69; font-size: 11px; text-align: center; }
+    .product-visual { position: relative; min-height: 540px; display: grid; place-items: center; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); }
+    .visual-label { position: absolute; top: 18px; left: 18px; z-index: 1; padding: 8px 11px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--ink); font-size: 10px; font-weight: 800; letter-spacing: .09em; }
+    .product-illustration { position: relative; z-index: 1; width: min(94%, 520px); height: auto; }
+    .visual-caption { position: absolute; right: 16px; bottom: 14px; left: 16px; color: var(--muted); font-size: 11px; text-align: center; }
 
     .product-info { padding-top: 5px; }
     .category { margin: 0 0 12px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
     h1 { margin: 0; font-size: clamp(29px, 3.6vw, 43px); line-height: 1.08; letter-spacing: -.055em; }
     .reference { margin: 12px 0 0; color: var(--muted); font-size: 14px; }
-    .product-note { margin: 26px 0 22px; color: #454b54; font-size: 15px; line-height: 1.65; }
+    .product-note { margin: 20px 0 17px; color: var(--muted); font-size: 15px; line-height: 1.65; }
+    .module-card { display: flex; align-items: flex-start; gap: 13px; margin: 0 0 20px; padding: 15px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+    .module-mark { flex: 0 0 36px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 5px; background: var(--soft); color: var(--blue); font-size: 17px; font-weight: 900; }
+    .module-card strong { display: block; margin: 1px 0 4px; font-size: 13px; }
+    .module-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
     .attributes { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 25px; padding: 0; list-style: none; }
-    .attributes li { padding: 9px 12px; border-radius: 5px; background: var(--soft); font-size: 12px; font-weight: 700; }
+    .attributes li { padding: 9px 12px; border-radius: 5px; background: var(--soft); color: var(--ink); font-size: 12px; font-weight: 700; }
     .attributes li::before { content: "✓"; margin-right: 7px; color: var(--blue); }
 
     .concept-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 21px 0 26px; }
-    .concept-tags span { padding: 8px 11px; border: 1px solid var(--line); border-radius: 4px; color: #414853; font-size: 11px; font-weight: 700; }
+    .concept-tags span { padding: 8px 11px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); font-size: 11px; font-weight: 700; }
     .actions { display: grid; gap: 10px; }
-    .button { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 19px; border: 0; border-radius: 6px; background: var(--blue); color: var(--white); font-size: 14px; font-weight: 800; text-align: center; text-decoration: none; transition: background-color .18s ease, transform .18s ease; }
+    .button { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 19px; border: 0; border-radius: 6px; background: var(--blue); color: var(--button-text); font-size: 14px; font-weight: 800; text-align: center; text-decoration: none; transition: background-color .18s ease, transform .18s ease; }
     .button:hover { background: var(--blue-dark); transform: translateY(-1px); }
-    .button-secondary { border: 1px solid #d5d9df; background: var(--white); color: var(--ink); }
-    .button-secondary:hover { border-color: var(--blue); background: var(--white); color: var(--blue); }
+    .button-secondary { border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+    .button-secondary:hover { border-color: var(--blue); background: var(--surface); color: var(--blue); }
     .project-note { margin: 17px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
 
     .feature-strip { padding: 35px 0; background: var(--soft); }
     .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
     .feature { display: flex; align-items: flex-start; gap: 13px; }
-    .feature-mark { flex: 0 0 38px; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; color: var(--blue); background: var(--white); font-size: 18px; font-weight: 800; }
+    .feature-mark { flex: 0 0 38px; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; color: var(--blue); background: var(--surface); font-size: 18px; font-weight: 800; }
     .feature strong { display: block; margin-top: 2px; font-size: 14px; }
     .feature p { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
 
@@ -83,10 +129,10 @@
     .eyebrow { margin: 0 0 11px; color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
     h2 { margin: 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: -.045em; }
     .video-heading p { max-width: 430px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .video-layout { display: grid; grid-template-columns: minmax(245px, .7fr) minmax(320px, 1fr); align-items: center; gap: clamp(28px, 6vw, 72px); padding: 28px; border-radius: 12px; background: #f3f5fb; }
+    .video-layout { display: grid; grid-template-columns: minmax(245px, .7fr) minmax(320px, 1fr); align-items: center; gap: clamp(28px, 6vw, 72px); padding: 28px; border: 1px solid var(--line); border-radius: 8px; background: var(--video-surface); }
     .video-copy h3 { margin: 0; font-size: clamp(22px, 3vw, 29px); letter-spacing: -.035em; }
     .video-copy p { margin: 13px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
-    .video-copy .video-disclaimer { margin-top: 18px; padding-left: 12px; border-left: 3px solid var(--blue); color: #414853; font-size: 12px; }
+    .video-copy .video-disclaimer { margin-top: 18px; padding-left: 12px; border-left: 3px solid var(--blue); color: var(--muted); font-size: 12px; }
     .video-frame-wrap { position: relative; width: min(100%, 300px); justify-self: center; overflow: hidden; border-radius: 8px; background: #10184a; box-shadow: 0 14px 36px #15234a1c; }
     .video-frame { width: 100%; aspect-ratio: 9 / 16; display: block; border: 0; }
     .fullscreen-button { position: absolute; z-index: 1; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 0 11px; border: 1px solid #ffffff55; border-radius: 5px; background: #111827df; color: var(--white); font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; transition: background-color .18s ease; }
@@ -110,8 +156,6 @@
     @media (max-width: 780px) {
       .product { grid-template-columns: 1fr; gap: 28px; padding-top: 20px; padding-bottom: 48px; }
       .product-visual { min-height: auto; aspect-ratio: 1 / .88; }
-      .product-visual::before { width: 68vw; height: 68vw; max-width: 390px; max-height: 390px; }
-      .product-visual::after { width: 55vw; height: 55vw; max-width: 320px; max-height: 320px; }
       .product-illustration { width: min(92%, 430px); }
       .product-info { max-width: 620px; }
       .video-heading { align-items: flex-start; flex-direction: column; gap: 12px; }
@@ -124,6 +168,8 @@
       .wrap { width: min(100% - 30px, 1200px); }
       .announcement-inner { min-height: 32px; font-size: 9px; }
       .nav { min-height: 62px; }
+      .nav-actions { gap: 10px; }
+      .nav-link { font-size: 11px; }
       .breadcrumbs { padding-top: 16px; font-size: 11px; }
       .feature-grid { grid-template-columns: 1fr; gap: 19px; }
       .feature-strip { padding: 25px 0; }
@@ -131,6 +177,10 @@
       .video-layout { padding: 20px; }
       .spec-inner { align-items: flex-start; flex-direction: column; }
       .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (max-width: 380px) {
+      .nav-actions > .nav-link { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -142,24 +192,32 @@
   <div class="announcement">
     <div class="wrap announcement-inner">
       <span class="announcement-mark" aria-hidden="true">●</span>
-      <span>PRÉSENTATION PRODUIT · SPORT &amp; MONTAGNE</span>
+      <span>ACCESSOIRE DE TABLE DE PING-PONG</span>
     </div>
   </div>
 
   <header class="site-header">
     <nav class="wrap nav" aria-label="Navigation principale">
-      <a class="brand" href="#" aria-label="Atelier sport, accueil">
+      <a class="brand" href="#" aria-label="PING AI, accueil">
         <span class="brand-symbol" aria-hidden="true">▲</span>
-        <span>ATELIER SPORT</span>
+        <span>PING AI</span>
       </a>
-      <a class="nav-link" href="#video">Voir la vidéo <span aria-hidden="true">↓</span></a>
+      <div class="nav-actions">
+        <a class="nav-link" href="#video">Voir la vidéo <span aria-hidden="true">↓</span></a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Activer le mode sombre">
+          <svg class="theme-icon-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.5"/><path d="M10 1.5v2m0 13v2m8.5-8.5h-2m-13 0h-2m14.51-6.01-1.42 1.42m-9.18 9.18-1.42 1.42m12.02 0-1.42-1.42m-9.18-9.18L4.99 3.99"/></svg>
+          <svg class="theme-icon-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16.8 12.4A7.4 7.4 0 0 1 7.6 3.2 7.5 7.5 0 1 0 16.8 12.4Z"/></svg>
+          <span id="theme-label">Mode sombre</span>
+        </button>
+        <span class="visually-hidden" id="theme-status" role="status" aria-live="polite"></span>
+      </div>
     </nav>
   </header>
 
   <main>
-    <div class="wrap breadcrumbs" aria-label="Fil d’Ariane">
-      Accueil <span aria-hidden="true">/</span> Ski <span aria-hidden="true">/</span> Vêtements homme <span aria-hidden="true">/</span> Sous-vêtement technique
-    </div>
+    <nav class="wrap breadcrumbs" aria-label="Fil d’Ariane">
+      Accueil <span aria-hidden="true">/</span> Sports de raquette <span aria-hidden="true">/</span> Tennis de table <span aria-hidden="true">/</span> Accessoires <span aria-hidden="true">/</span> Accessoire de table de ping-pong
+    </nav>
 
     <section class="wrap product" aria-labelledby="product-title">
       <div class="gallery">
@@ -167,45 +225,48 @@
           <span class="visual-label">PING AI · CONCEPT</span>
           <svg class="product-illustration" viewBox="0 0 480 440" role="img" aria-labelledby="table-title table-description" xmlns="http://www.w3.org/2000/svg">
             <title id="table-title">Illustration d’une table de tennis de table connectée</title>
-            <desc id="table-description">Illustration originale d’une table de ping-pong avec un petit module PING AI et une balle.</desc>
+            <desc id="table-description">Illustration originale d’une table de ping-pong avec un petit module PING AI posé sur le plateau et une balle.</desc>
             <defs>
-              <linearGradient id="tabletop" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#3969df"/>
-                <stop offset="1" stop-color="#1842a8"/>
-              </linearGradient>
-              <linearGradient id="tableedge" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0" stop-color="#20252f"/>
-                <stop offset="1" stop-color="#11151d"/>
+              <linearGradient id="tabletop" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stop-color="#3476e8"/>
+                <stop offset="1" stop-color="#1552c2"/>
               </linearGradient>
             </defs>
-            <ellipse cx="240" cy="376" rx="174" ry="22" fill="#121a2a" opacity=".1"/>
-            <path d="m127 274 18 10-13 111-17 1zM338 220l18 1 32 130-17 6z" fill="#424a56"/>
-            <path d="m117 391 27-1-2 10h-38zm244-44 27-9 4 10-28 12z" fill="#303743"/>
-            <path d="m84 218 263-80 65 122-266 86z" fill="url(#tabletop)" stroke="#f8faff" stroke-width="5" stroke-linejoin="round"/>
-            <path d="m146 347 266-87v17l-266 90z" fill="url(#tableedge)"/>
-            <path d="m199 183 64 122m-126-81 261-79" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="3"/>
-            <path d="m165 252 265-82" fill="none" stroke="#fff" stroke-width="4"/>
-            <path d="m161 242 268-84" fill="none" stroke="#1b2230" stroke-width="3"/>
-            <path d="m165 240 3 12m261-94 3 11" fill="none" stroke="#59616d" stroke-width="4"/>
-            <path d="m84 218-17-10 267-82 14 12" fill="#e1e6ed" stroke="#b6beca" stroke-width="2"/>
-            <g transform="translate(78 176)">
-              <path d="m0 14 30-10 22 8-30 11z" fill="#202735"/>
-              <path d="m0 14v20l22 10V23z" fill="#131a26"/>
-              <path d="m22 23 30-11v20L22 44z" fill="#323c4d"/>
-              <rect x="28" y="21" width="8" height="5" rx="2.5" fill="#d7f45b"/>
-              <text x="12" y="36" fill="#fff" font-family="Arial,sans-serif" font-size="5" font-weight="700" transform="rotate(-20 12 36)">PING AI</text>
+            <ellipse cx="264" cy="372" rx="170" ry="17" fill="#15213a" opacity=".11"/>
+            <path d="m151 297 16 4-5 91-16 3zm258-61 16-5 8 115-16 4z" fill="#303844"/>
+            <path d="m139 392 27-4v9l-29 5zm278-53 20-5 5 9-24 7z" fill="#222a35"/>
+            <path d="m83 154 266-66 89 155-266 68z" fill="url(#tabletop)" stroke="#18345d" stroke-width="4" stroke-linejoin="round"/>
+            <path d="m172 311 266-68v15l-266 72z" fill="#17345f"/>
+            <path d="m83 154 266-66 89 155-266 68z" fill="none" stroke="#f8fbff" stroke-width="3" stroke-linejoin="round"/>
+            <path d="m216 121 89 155m-178-88 266-66" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="2.5"/>
+            <path d="m127 220 266-66" fill="none" stroke="#fff" stroke-width="4"/>
+            <path d="m124 213 270-67" fill="none" stroke="#17345f" stroke-width="3"/>
+            <path d="m127 217 2 7m266-72 3 7" fill="none" stroke="#68788e" stroke-width="3"/>
+            <g transform="translate(125 163)">
+              <path d="m0 7 28-7 23 7-28 8z" fill="#f3f5f8" stroke="#243449" stroke-width="2" stroke-linejoin="round"/>
+              <path d="m0 7v24l23 8V15z" fill="#202a37"/>
+              <path d="m23 15 28-8v23l-28 9z" fill="#344255"/>
+              <path d="M32 13v6" stroke="#d7f45b" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="34" cy="4" r="2" fill="#d7f45b"/>
             </g>
-            <circle cx="310" cy="203" r="8" fill="#d7f45b" stroke="#fff" stroke-width="3"/>
+            <circle cx="327" cy="177" r="7" fill="#d7f45b" stroke="#fff" stroke-width="3"/>
           </svg>
-          <span class="visual-caption">Illustration du concept · visuel de démonstration</span>
+          <span class="visual-caption">Une table, un petit module à clipser · illustration du concept</span>
         </div>
       </div>
 
       <div class="product-info">
-        <p class="category">Tennis de table · Concept connecté</p>
+        <p class="category">Accessoire de table de ping-pong</p>
         <h1 id="product-title">Le ping-pong passe en mode intelligent.</h1>
         <p class="reference">PING AI · Une nouvelle façon de jouer</p>
-        <p class="product-note">Un concept imaginé pour enrichir tes parties : suis le score, observe les échanges et découvre ton jeu sous un nouvel angle.</p>
+        <p class="product-note">Un petit accessoire imaginé pour suivre le score, observer les échanges et découvrir ton jeu sous un nouvel angle.</p>
+        <div class="module-card">
+          <span class="module-mark" aria-hidden="true">+</span>
+          <div>
+            <strong>Un petit module, ta table reste en place.</strong>
+            <p>Le concept se clipse sur le côté de la table, sans la remplacer.</p>
+          </div>
+        </div>
         <ul class="attributes" aria-label="Les idées du concept PING AI">
           <li>Score assisté</li>
           <li>Échanges suivis</li>
@@ -323,6 +384,32 @@
     });
 
     document.addEventListener("fullscreenchange", updateFullscreenButton);
+
+    const themeToggle = document.querySelector("#theme-toggle");
+    const themeLabel = document.querySelector("#theme-label");
+    const themeStatus = document.querySelector("#theme-status");
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+    function updateTheme(theme) {
+      const isDark = theme === "dark";
+      document.documentElement.dataset.theme = theme;
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+      themeToggle.setAttribute("aria-label", isDark ? "Activer le mode clair" : "Activer le mode sombre");
+      themeLabel.textContent = isDark ? "Mode clair" : "Mode sombre";
+      themeMeta.setAttribute("content", isDark ? "#11151d" : "#ffffff");
+    }
+
+    updateTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+    themeToggle.addEventListener("click", () => {
+      const theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      updateTheme(theme);
+      themeStatus.textContent = "";
+      try {
+        localStorage.setItem("ping-ai-theme", theme);
+      } catch {
+        themeStatus.textContent = "Le thème a changé, mais la préférence ne peut pas être enregistrée dans ce navigateur.";
+      }
+    });
   </script>
 </body>
 </html>

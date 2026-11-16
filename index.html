@@ -87,8 +87,15 @@
     .video-copy h3 { margin: 0; font-size: clamp(22px, 3vw, 29px); letter-spacing: -.035em; }
     .video-copy p { margin: 13px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
     .video-copy .video-disclaimer { margin-top: 18px; padding-left: 12px; border-left: 3px solid var(--blue); color: #414853; font-size: 12px; }
-    .video-frame-wrap { width: min(100%, 300px); justify-self: center; overflow: hidden; border-radius: 8px; background: #10184a; box-shadow: 0 14px 36px #15234a1c; }
+    .video-frame-wrap { position: relative; width: min(100%, 300px); justify-self: center; overflow: hidden; border-radius: 8px; background: #10184a; box-shadow: 0 14px 36px #15234a1c; }
     .video-frame { width: 100%; aspect-ratio: 9 / 16; display: block; border: 0; }
+    .fullscreen-button { position: absolute; z-index: 1; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 0 11px; border: 1px solid #ffffff55; border-radius: 5px; background: #111827df; color: var(--white); font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; transition: background-color .18s ease; }
+    .fullscreen-button:hover { background: #111827; }
+    .fullscreen-button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .fullscreen-button svg { width: 15px; height: 15px; flex: 0 0 15px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; }
+    .fullscreen-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .video-frame-wrap:fullscreen { position: fixed; z-index: 9999; inset: 0; width: 100vw; width: 100dvw; height: 100vh; height: 100dvh; max-width: none; display: flex; align-items: center; justify-content: center; padding: 24px; border-radius: 0; background: #0b0d12; box-shadow: none; }
+    .video-frame-wrap:fullscreen .video-frame { width: min(100%, 56.25dvh); height: auto; max-height: calc(100dvh - 48px); aspect-ratio: 9 / 16; }
 
     .spec-prompt { padding: 30px 0; border-top: 1px solid var(--line); }
     .spec-inner { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
@@ -254,12 +261,18 @@
           <div class="video-frame-wrap">
             <iframe
               class="video-frame"
+              id="concept-video"
               src="./vraipub.html"
               title="Vidéo de présentation du concept PING AI au tennis de table"
               loading="lazy"
               allow="fullscreen"
               allowfullscreen
             ></iframe>
+            <button class="fullscreen-button" id="video-fullscreen" type="button" aria-controls="concept-video" aria-label="Afficher la vidéo en plein écran">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 3H3v4M13 3h4v4M17 13v4h-4M7 17H3v-4"/></svg>
+              <span>Agrandir</span>
+            </button>
+            <span class="fullscreen-status" id="fullscreen-status" role="status" aria-live="polite"></span>
           </div>
         </div>
       </div>
@@ -279,5 +292,37 @@
       <p>Concept créatif de tennis de table · Visuels et fonctionnalités à titre illustratif</p>
     </div>
   </footer>
+  <script>
+    const videoPlayer = document.querySelector(".video-frame-wrap");
+    const fullscreenButton = document.querySelector("#video-fullscreen");
+    const fullscreenLabel = fullscreenButton.querySelector("span");
+    const fullscreenStatus = document.querySelector("#fullscreen-status");
+
+    function updateFullscreenButton() {
+      const isFullscreen = document.fullscreenElement === videoPlayer;
+      fullscreenLabel.textContent = isFullscreen ? "Réduire" : "Agrandir";
+      fullscreenButton.setAttribute(
+        "aria-label",
+        isFullscreen ? "Quitter le plein écran" : "Afficher la vidéo en plein écran"
+      );
+    }
+
+    fullscreenButton.addEventListener("click", async () => {
+      fullscreenStatus.textContent = "";
+      try {
+        if (document.fullscreenElement === videoPlayer) {
+          await document.exitFullscreen();
+        } else if (videoPlayer.requestFullscreen) {
+          await videoPlayer.requestFullscreen();
+        } else {
+          fullscreenStatus.textContent = "Le plein écran n’est pas disponible dans ce navigateur.";
+        }
+      } catch {
+        fullscreenStatus.textContent = "Impossible d’activer le plein écran. Essaie la touche Échap ou vérifie les réglages du navigateur.";
+      }
+    });
+
+    document.addEventListener("fullscreenchange", updateFullscreenButton);
+  </script>
 </body>
 </html>

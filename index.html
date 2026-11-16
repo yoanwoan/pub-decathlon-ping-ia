@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Découvre PING AI, un accessoire de table de ping-pong imaginé pour enrichir tes parties.">
-  <title>PING AI — Accessoire de table de ping-pong</title>
+  <meta name="description" content="Découvre PING AI : un concept d’accessoire amovible pour table de ping-pong, imaginé pour suivre tes parties et tes échanges.">
+  <title>PING AI — Accessoire pour table de ping-pong</title>
   <script>
     try {
       const savedTheme = localStorage.getItem("ping-ai-theme");
@@ -124,6 +124,25 @@
     .feature strong { display: block; margin-top: 2px; font-size: 14px; }
     .feature p { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
 
+    .details-section { padding: 68px 0 72px; }
+    .details-heading { max-width: 660px; margin-bottom: 24px; }
+    .details-heading .eyebrow { margin-bottom: 10px; }
+    .details-heading h2 { font-size: clamp(26px, 3.5vw, 36px); }
+    .details-heading p { max-width: 580px; margin: 12px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .details-list { border-top: 1px solid var(--line); }
+    .product-detail { border-bottom: 1px solid var(--line); }
+    .product-detail summary { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 2px; color: var(--ink); font-size: 15px; font-weight: 800; cursor: pointer; list-style: none; }
+    .product-detail summary::-webkit-details-marker { display: none; }
+    .product-detail summary::after { content: "+"; flex: 0 0 28px; width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--blue); font-size: 19px; font-weight: 400; }
+    .product-detail[open] summary::after { content: "−"; }
+    .product-detail summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+    .detail-content { max-width: 790px; padding: 0 40px 22px 2px; color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .detail-content p { margin: 0 0 12px; }
+    .detail-content p:last-child { margin-bottom: 0; }
+    .detail-content ul { display: grid; gap: 9px; margin: 0; padding-left: 19px; }
+    .detail-content li::marker { color: var(--blue); }
+    .impact-note { padding-left: 12px; border-left: 3px solid var(--accent); }
+
     .video-section { padding: 76px 0; }
     .video-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 27px; }
     .eyebrow { margin: 0 0 11px; color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
@@ -173,6 +192,9 @@
       .breadcrumbs { padding-top: 16px; font-size: 11px; }
       .feature-grid { grid-template-columns: 1fr; gap: 19px; }
       .feature-strip { padding: 25px 0; }
+      .details-section { padding: 48px 0; }
+      .product-detail summary { min-height: 60px; font-size: 14px; }
+      .detail-content { padding-right: 4px; font-size: 13px; }
       .video-section { padding: 51px 0; }
       .video-layout { padding: 20px; }
       .spec-inner { align-items: flex-start; flex-direction: column; }
@@ -295,11 +317,51 @@
         </div>
         <div class="feature">
           <span class="feature-mark" aria-hidden="true">↗</span>
-          <div><strong>Chaque échange compte</strong><p>Suis la balle et revis les moments forts de la partie.</p></div>
+          <div><strong>Chaque échange compte</strong><p>Suis la balle et observe sa vitesse et sa trajectoire.</p></div>
         </div>
         <div class="feature">
           <span class="feature-mark" aria-hidden="true">＋</span>
           <div><strong>Progresse à ton rythme</strong><p>Des statistiques pour découvrir ton jeu autrement.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="details-section" id="details" aria-labelledby="details-title">
+      <div class="wrap">
+        <div class="details-heading">
+          <p class="eyebrow">Le concept en détail</p>
+          <h2 id="details-title">Tout savoir sur PING AI</h2>
+          <p>Les idées présentées dans la démo, expliquées simplement. PING AI est un concept : ces fonctions ne constituent pas une fiche technique d’un produit commercialisé.</p>
+        </div>
+
+        <div class="details-list">
+          <details class="product-detail" name="ping-ai-details" open>
+            <summary>Description du concept</summary>
+            <div class="detail-content">
+              <p>PING AI imagine un petit accessoire amovible qui se clipse sur le côté d’une table de ping-pong, sans remplacer la table. Dans la vidéo, des caméras observent le jeu pour aider à suivre le score et les échanges.</p>
+              <p>L’objectif présenté : moins d’interruptions pour compter les points, et plus de temps pour jouer ensemble.</p>
+            </div>
+          </details>
+
+          <details class="product-detail" name="ping-ai-details">
+            <summary>Caractéristiques présentées dans la vidéo</summary>
+            <div class="detail-content">
+              <ul>
+                <li>Un module décrit comme compact, amovible et à clipser sur le côté de la table.</li>
+                <li>Des caméras qui couvrent la table pour aider l’IA à compter les points.</li>
+                <li>Un suivi de la balle, de sa vitesse et de sa trajectoire pendant les échanges.</li>
+                <li>Des statistiques de partie et des conseils de jeu présentés dans une application.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="product-detail" name="ping-ai-details">
+            <summary>Conception et impact environnemental</summary>
+            <div class="detail-content">
+              <p>Le concept suit une idée simple : ajouter un module plutôt que remplacer une table encore utilisable. La vidéo présente le module comme amovible et évoque une réduction des déchets.</p>
+              <p class="impact-note">C’est une intention de conception, pas un impact mesuré : aucune donnée de fabrication, analyse du cycle de vie ou certification environnementale n’est fournie dans la vidéo.</p>
+            </div>
+          </details>
         </div>
       </div>
     </section>

@@ -6,6 +6,9 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="Découvre PING AI : un concept d’accessoire amovible pour table de ping-pong, imaginé pour suivre tes parties et tes échanges.">
   <title>PING AI — Accessoire pour table de ping-pong</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <script>
     try {
       const savedTheme = localStorage.getItem("ping-ai-theme");
@@ -23,8 +26,8 @@
   <style>
     :root {
       color-scheme: light;
-      --blue: #1768e8;
-      --blue-dark: #104caa;
+      --blue: #0082c3;
+      --blue-dark: #006a9f;
       --ink: #17191d;
       --muted: #616873;
       --soft: #f3f5f7;
@@ -32,15 +35,14 @@
       --surface: #fff;
       --white: #fff;
       --line: #e5e8ec;
-      --video-surface: #f3f5fb;
-      --accent: #d7f45b;
+      --accent: #f0b323;
       --button-text: #fff;
     }
 
     :root[data-theme="dark"] {
       color-scheme: dark;
-      --blue: #91b7ff;
-      --blue-dark: #b4cdff;
+      --blue: #82c9f0;
+      --blue-dark: #a9dcf7;
       --ink: #f3f5f8;
       --muted: #b1bac8;
       --soft: #202734;
@@ -48,12 +50,11 @@
       --surface: #191f29;
       --white: #fff;
       --line: #323b49;
-      --video-surface: #1c2431;
       --button-text: #101725;
     }
 
     :root {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Roboto, Arial, sans-serif;
       font-synthesis: none;
       text-rendering: optimizeLegibility;
     }
@@ -64,14 +65,9 @@
     a { color: inherit; }
     .wrap { width: min(1200px, calc(100% - 48px)); margin-inline: auto; }
 
-    .announcement { color: var(--white); background: #17191d; }
-    .announcement-inner { min-height: 34px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-align: center; }
-    .announcement-mark { color: var(--accent); }
-
     .site-header { border-bottom: 1px solid var(--line); background: var(--surface); }
     .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font-size: 16px; font-weight: 900; letter-spacing: -.05em; }
-    .brand-symbol { color: var(--blue); font-size: 22px; }
+    .brand { display: inline-flex; align-items: center; text-decoration: none; font-size: 16px; font-weight: 700; }
     .nav-link { color: var(--ink); font-size: 13px; font-weight: 700; text-decoration: none; }
     .nav-link:hover { color: var(--blue); }
     .nav-actions { display: flex; align-items: center; gap: 22px; }
@@ -90,69 +86,42 @@
 
     .product { display: grid; grid-template-columns: minmax(0, 1.13fr) minmax(340px, .87fr); align-items: center; gap: clamp(36px, 6vw, 78px); padding-top: 26px; padding-bottom: 76px; }
     .gallery { min-width: 0; }
-    .product-visual { position: relative; min-height: 540px; display: grid; place-items: center; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); }
-    .visual-label { position: absolute; top: 18px; left: 18px; z-index: 1; padding: 8px 11px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--ink); font-size: 10px; font-weight: 800; letter-spacing: .09em; }
+    .product-visual { position: relative; min-height: 540px; display: grid; place-items: center; overflow: hidden; background: var(--soft); }
     .product-illustration { position: relative; z-index: 1; width: min(94%, 520px); height: auto; }
     .visual-caption { position: absolute; right: 16px; bottom: 14px; left: 16px; color: var(--muted); font-size: 11px; text-align: center; }
 
     .product-info { padding-top: 5px; }
-    .category { margin: 0 0 12px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
-    h1 { margin: 0; font-size: clamp(29px, 3.6vw, 43px); line-height: 1.08; letter-spacing: -.055em; }
-    .reference { margin: 12px 0 0; color: var(--muted); font-size: 14px; }
-    .product-note { margin: 20px 0 17px; color: var(--muted); font-size: 15px; line-height: 1.65; }
-    .module-card { display: flex; align-items: flex-start; gap: 13px; margin: 0 0 20px; padding: 15px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
-    .module-mark { flex: 0 0 36px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 5px; background: var(--soft); color: var(--blue); font-size: 17px; font-weight: 900; }
-    .module-card strong { display: block; margin: 1px 0 4px; font-size: 13px; }
-    .module-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
-    .attributes { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 25px; padding: 0; list-style: none; }
-    .attributes li { padding: 9px 12px; border-radius: 5px; background: var(--soft); color: var(--ink); font-size: 12px; font-weight: 700; }
-    .attributes li::before { content: "✓"; margin-right: 7px; color: var(--blue); }
+    .category { margin: 0 0 12px; color: var(--muted); font-size: 14px; font-weight: 500; }
+    h1 { margin: 0; font-size: clamp(32px, 4vw, 46px); line-height: 1.1; letter-spacing: -.02em; }
+    .product-note { max-width: 470px; margin: 18px 0 24px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+    .actions { display: flex; }
+    .button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 20px; border: 0; border-radius: 3px; background: var(--blue); color: var(--button-text); font-size: 14px; font-weight: 700; text-align: center; text-decoration: none; transition: background-color .18s ease; }
+    .button:hover { background: var(--blue-dark); }
+    .button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+    .project-note { margin: 13px 0 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
 
-    .concept-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 21px 0 26px; }
-    .concept-tags span { padding: 8px 11px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); font-size: 11px; font-weight: 700; }
-    .actions { display: grid; gap: 10px; }
-    .button { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 19px; border: 0; border-radius: 6px; background: var(--blue); color: var(--button-text); font-size: 14px; font-weight: 800; text-align: center; text-decoration: none; transition: background-color .18s ease, transform .18s ease; }
-    .button:hover { background: var(--blue-dark); transform: translateY(-1px); }
-    .button-secondary { border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
-    .button-secondary:hover { border-color: var(--blue); background: var(--surface); color: var(--blue); }
-    .project-note { margin: 17px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
-
-    .feature-strip { padding: 35px 0; background: var(--soft); }
-    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .feature { display: flex; align-items: flex-start; gap: 13px; }
-    .feature-mark { flex: 0 0 38px; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; color: var(--blue); background: var(--surface); font-size: 18px; font-weight: 800; }
-    .feature strong { display: block; margin-top: 2px; font-size: 14px; }
-    .feature p { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
-
-    .details-section { padding: 68px 0 72px; }
-    .details-heading { max-width: 660px; margin-bottom: 24px; }
-    .details-heading .eyebrow { margin-bottom: 10px; }
-    .details-heading h2 { font-size: clamp(26px, 3.5vw, 36px); }
-    .details-heading p { max-width: 580px; margin: 12px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .details-section { padding: 56px 0 64px; }
+    .details-heading { margin-bottom: 18px; }
     .details-list { border-top: 1px solid var(--line); }
     .product-detail { border-bottom: 1px solid var(--line); }
-    .product-detail summary { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 2px; color: var(--ink); font-size: 15px; font-weight: 800; cursor: pointer; list-style: none; }
+    .product-detail summary { min-height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; color: var(--ink); font-size: 15px; font-weight: 700; cursor: pointer; list-style: none; }
     .product-detail summary::-webkit-details-marker { display: none; }
-    .product-detail summary::after { content: "+"; flex: 0 0 28px; width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--blue); font-size: 19px; font-weight: 400; }
+    .product-detail summary::after { content: "+"; flex: 0 0 20px; width: 20px; color: var(--blue); font-size: 20px; font-weight: 400; text-align: center; }
     .product-detail[open] summary::after { content: "−"; }
     .product-detail summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
-    .detail-content { max-width: 790px; padding: 0 40px 22px 2px; color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .detail-content { max-width: 790px; padding: 0 40px 22px 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
     .detail-content p { margin: 0 0 12px; }
     .detail-content p:last-child { margin-bottom: 0; }
     .detail-content ul { display: grid; gap: 9px; margin: 0; padding-left: 19px; }
     .detail-content li::marker { color: var(--blue); }
-    .impact-note { padding-left: 12px; border-left: 3px solid var(--accent); }
+    .impact-note { padding-left: 12px; border-left: 2px solid var(--blue); }
 
-    .video-section { padding: 76px 0; }
-    .video-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 27px; }
-    .eyebrow { margin: 0 0 11px; color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-    h2 { margin: 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: -.045em; }
-    .video-heading p { max-width: 430px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .video-layout { display: grid; grid-template-columns: minmax(245px, .7fr) minmax(320px, 1fr); align-items: center; gap: clamp(28px, 6vw, 72px); padding: 28px; border: 1px solid var(--line); border-radius: 8px; background: var(--video-surface); }
-    .video-copy h3 { margin: 0; font-size: clamp(22px, 3vw, 29px); letter-spacing: -.035em; }
+    .video-section { padding: 56px 0; }
+    .video-heading { margin-bottom: 22px; }
+    h2 { margin: 0; font-size: clamp(28px, 4vw, 40px); letter-spacing: -.02em; }
+    .video-layout { display: grid; grid-template-columns: minmax(245px, .7fr) minmax(320px, 1fr); align-items: center; gap: clamp(28px, 6vw, 72px); }
     .video-copy p { margin: 13px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
-    .video-copy .video-disclaimer { margin-top: 18px; padding-left: 12px; border-left: 3px solid var(--blue); color: var(--muted); font-size: 12px; }
-    .video-frame-wrap { position: relative; width: min(100%, 300px); justify-self: center; overflow: hidden; border-radius: 8px; background: #10184a; box-shadow: 0 14px 36px #15234a1c; }
+    .video-frame-wrap { position: relative; width: min(100%, 300px); justify-self: center; overflow: hidden; background: #10184a; }
     .video-frame { width: 100%; aspect-ratio: 9 / 16; display: block; border: 0; }
     .fullscreen-button { position: absolute; z-index: 1; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 0 11px; border: 1px solid #ffffff55; border-radius: 5px; background: #111827df; color: var(--white); font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; transition: background-color .18s ease; }
     .fullscreen-button:hover { background: #111827; }
@@ -162,22 +131,16 @@
     .video-frame-wrap:fullscreen { position: fixed; z-index: 9999; inset: 0; width: 100vw; width: 100dvw; height: 100vh; height: 100dvh; max-width: none; display: flex; align-items: center; justify-content: center; padding: 24px; border-radius: 0; background: #0b0d12; box-shadow: none; }
     .video-frame-wrap:fullscreen .video-frame { width: min(100%, 56.25dvh); height: auto; max-height: calc(100dvh - 48px); aspect-ratio: 9 / 16; }
 
-    .spec-prompt { padding: 30px 0; border-top: 1px solid var(--line); }
-    .spec-inner { display: flex; align-items: center; justify-content: space-between; gap: 22px; }
-    .spec-inner p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
-    .spec-inner strong { display: block; margin-bottom: 4px; color: var(--ink); font-size: 15px; }
-
-    footer { padding: 22px 0; background: #17191d; color: #e8eaee; }
+    footer { padding: 20px 0; border-top: 1px solid var(--line); background: var(--surface); color: var(--muted); }
     .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; font-size: 11px; line-height: 1.55; }
     .footer-inner p { margin: 0; }
-    .footer-brand { color: var(--white); font-size: 13px; font-weight: 900; letter-spacing: -.03em; }
+    .footer-brand { color: var(--ink); font-size: 13px; font-weight: 700; }
 
     @media (max-width: 780px) {
       .product { grid-template-columns: 1fr; gap: 28px; padding-top: 20px; padding-bottom: 48px; }
       .product-visual { min-height: auto; aspect-ratio: 1 / .88; }
       .product-illustration { width: min(92%, 430px); }
       .product-info { max-width: 620px; }
-      .video-heading { align-items: flex-start; flex-direction: column; gap: 12px; }
       .video-layout { grid-template-columns: 1fr; }
       .video-copy { max-width: 560px; }
       .video-frame-wrap { width: min(100%, 290px); }
@@ -185,19 +148,14 @@
 
     @media (max-width: 560px) {
       .wrap { width: min(100% - 30px, 1200px); }
-      .announcement-inner { min-height: 32px; font-size: 9px; }
       .nav { min-height: 62px; }
       .nav-actions { gap: 10px; }
       .nav-link { font-size: 11px; }
       .breadcrumbs { padding-top: 16px; font-size: 11px; }
-      .feature-grid { grid-template-columns: 1fr; gap: 19px; }
-      .feature-strip { padding: 25px 0; }
       .details-section { padding: 48px 0; }
       .product-detail summary { min-height: 60px; font-size: 14px; }
       .detail-content { padding-right: 4px; font-size: 13px; }
-      .video-section { padding: 51px 0; }
-      .video-layout { padding: 20px; }
-      .spec-inner { align-items: flex-start; flex-direction: column; }
+      .video-section { padding: 42px 0; }
       .footer-inner { align-items: flex-start; flex-direction: column; }
     }
 
@@ -211,17 +169,9 @@
   </style>
 </head>
 <body>
-  <div class="announcement">
-    <div class="wrap announcement-inner">
-      <span class="announcement-mark" aria-hidden="true">●</span>
-      <span>ACCESSOIRE DE TABLE DE PING-PONG</span>
-    </div>
-  </div>
-
   <header class="site-header">
     <nav class="wrap nav" aria-label="Navigation principale">
       <a class="brand" href="#" aria-label="PING AI, accueil">
-        <span class="brand-symbol" aria-hidden="true">▲</span>
         <span>PING AI</span>
       </a>
       <div class="nav-actions">
@@ -238,13 +188,12 @@
 
   <main>
     <nav class="wrap breadcrumbs" aria-label="Fil d’Ariane">
-      Accueil <span aria-hidden="true">/</span> Sports de raquette <span aria-hidden="true">/</span> Tennis de table <span aria-hidden="true">/</span> Accessoires <span aria-hidden="true">/</span> Accessoire de table de ping-pong
+      Accueil <span aria-hidden="true">/</span> Sports de raquette <span aria-hidden="true">/</span> Tennis de table <span aria-hidden="true">/</span> Accessoires
     </nav>
 
     <section class="wrap product" aria-labelledby="product-title">
       <div class="gallery">
         <div class="product-visual">
-          <span class="visual-label">PING AI · CONCEPT</span>
           <svg class="product-illustration" viewBox="0 0 480 440" role="img" aria-labelledby="table-title table-description" xmlns="http://www.w3.org/2000/svg">
             <title id="table-title">Illustration d’une table de tennis de table connectée</title>
             <desc id="table-description">Illustration originale d’une table de ping-pong avec un petit module PING AI posé sur le plateau et une balle.</desc>
@@ -278,60 +227,20 @@
       </div>
 
       <div class="product-info">
-        <p class="category">Accessoire de table de ping-pong</p>
-        <h1 id="product-title">Le ping-pong passe en mode intelligent.</h1>
-        <p class="reference">PING AI · Une nouvelle façon de jouer</p>
-        <p class="product-note">Un petit accessoire imaginé pour suivre le score, observer les échanges et découvrir ton jeu sous un nouvel angle.</p>
-        <div class="module-card">
-          <span class="module-mark" aria-hidden="true">+</span>
-          <div>
-            <strong>Un petit module, ta table reste en place.</strong>
-            <p>Le concept se clipse sur le côté de la table, sans la remplacer.</p>
-          </div>
-        </div>
-        <ul class="attributes" aria-label="Les idées du concept PING AI">
-          <li>Score assisté</li>
-          <li>Échanges suivis</li>
-          <li>Stats de jeu</li>
-        </ul>
-
-        <div class="concept-tags" aria-label="Type de projet">
-          <span>Concept créatif</span>
-          <span>Tennis de table</span>
-          <span>Démo animée</span>
-        </div>
-
+        <p class="category">Accessoire pour table de ping-pong</p>
+        <h1 id="product-title">PING AI</h1>
+        <p class="product-note">Un concept de module amovible, à clipser sur le côté de la table pour suivre le score et observer les échanges.</p>
         <div class="actions">
-          <a class="button" href="#video">Voir PING AI en action <span aria-hidden="true">↓</span></a>
-          <a class="button button-secondary" href="#concept">Découvrir le concept <span aria-hidden="true">↘</span></a>
+          <a class="button" href="#video">Voir la vidéo <span aria-hidden="true">↓</span></a>
         </div>
-        <p class="project-note">Concept créatif présenté à titre de démonstration. Les fonctionnalités sont illustratives.</p>
-      </div>
-    </section>
-
-    <section class="feature-strip" id="concept" aria-label="Les points clés du concept">
-      <div class="wrap feature-grid">
-        <div class="feature">
-          <span class="feature-mark" aria-hidden="true">◎</span>
-          <div><strong>Le score en un clin d’œil</strong><p>Une idée pour rester dans le jeu et profiter de chaque point.</p></div>
-        </div>
-        <div class="feature">
-          <span class="feature-mark" aria-hidden="true">↗</span>
-          <div><strong>Chaque échange compte</strong><p>Suis la balle et observe sa vitesse et sa trajectoire.</p></div>
-        </div>
-        <div class="feature">
-          <span class="feature-mark" aria-hidden="true">＋</span>
-          <div><strong>Progresse à ton rythme</strong><p>Des statistiques pour découvrir ton jeu autrement.</p></div>
-        </div>
+        <p class="project-note">Concept présenté à titre illustratif; il ne s’agit pas d’un produit commercialisé.</p>
       </div>
     </section>
 
     <section class="details-section" id="details" aria-labelledby="details-title">
       <div class="wrap">
         <div class="details-heading">
-          <p class="eyebrow">Le concept en détail</p>
-          <h2 id="details-title">Tout savoir sur PING AI</h2>
-          <p>Les idées présentées dans la démo, expliquées simplement. PING AI est un concept : ces fonctions ne constituent pas une fiche technique d’un produit commercialisé.</p>
+          <h2 id="details-title">Le concept en détail</h2>
         </div>
 
         <div class="details-list">
@@ -369,17 +278,11 @@
     <section class="video-section" id="video" aria-labelledby="video-title">
       <div class="wrap">
         <div class="video-heading">
-          <div>
-            <p class="eyebrow">La démo · 30 secondes</p>
-            <h2 id="video-title">PING AI, en action.</h2>
-          </div>
-          <p>La vidéo est intégrée directement dans la page : lance-la ici ou passe en plein écran.</p>
+          <h2 id="video-title">La vidéo de présentation</h2>
         </div>
         <div class="video-layout">
           <div class="video-copy">
-            <h3>Le jeu, sous un nouveau jour.</h3>
-            <p>Une courte publicité animée pour découvrir l’idée derrière PING AI : des parties suivies, des échanges analysés et des statistiques pour s’amuser encore plus.</p>
-            <p class="video-disclaimer">Une présentation conceptuelle : la vidéo illustre une idée et ne vaut pas confirmation de fonctionnalités commercialisées.</p>
+            <p>Une présentation animée du concept PING AI et des fonctions imaginées pour le tennis de table.</p>
           </div>
           <div class="video-frame-wrap">
             <iframe
@@ -389,7 +292,6 @@
               title="Vidéo de présentation du concept PING AI au tennis de table"
               loading="lazy"
               allow="fullscreen"
-              allowfullscreen
             ></iframe>
             <button class="fullscreen-button" id="video-fullscreen" type="button" aria-controls="concept-video" aria-label="Afficher la vidéo en plein écran">
               <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 3H3v4M13 3h4v4M17 13v4h-4M7 17H3v-4"/></svg>
@@ -401,12 +303,6 @@
       </div>
     </section>
 
-    <section class="spec-prompt">
-      <div class="wrap spec-inner">
-        <p><strong>Un projet à imaginer</strong>Découvre le concept PING AI en vidéo, puis imagine tes prochaines parties autrement.</p>
-        <a class="nav-link" href="#video">Revoir la démo ↗</a>
-      </div>
-    </section>
   </main>
 
   <footer>
